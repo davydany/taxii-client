@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    display: flex;
+    height: 100vh;
+}
+
+#connections-column,
+#actions-column,
+#results-column {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+}
+
+#results-column {
+    border-right: none;
+}
+
+button, select, input {
+    margin-bottom: 10px;
+}
+
+#connection-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#connection-list li {
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #f0f0f0;
+}
+
+#connection-list li:hover {
+    background-color: #e0e0e0;
+}
+
+#results-output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

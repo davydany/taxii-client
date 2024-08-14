@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAXII GUI Client</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="connections-column">
+            <h2>Connections</h2>
+            <button id="add-connection">Add Connection</button>
+            <ul id="connection-list"></ul>
+        </div>
+        <div id="actions-column">
+            <h2>Actions</h2>
+            <select id="action-select" disabled>
+                <option value="">Select an action</option>
+            </select>
+            <div id="action-params"></div>
+        </div>
+        <div id="results-column">
+            <h2>Results</h2>
+            <pre id="results-output"></pre>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
