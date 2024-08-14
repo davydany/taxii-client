@@ -1,48 +1,97 @@
+:root {
+    --shelby-blue: #0072CE;
+    --shelby-dark-blue: #005BA1;
+    --shelby-light-blue: #3B9DFF;
+    --shelby-silver: #E0E0E0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--shelby-silver);
+    color: #333;
 }
 
 #app {
-    display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 2rem;
+}
+
+h2 {
+    color: var(--shelby-dark-blue);
+    border-bottom: 2px solid var(--shelby-blue);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 #connections-column,
 #actions-column,
 #results-column {
-    flex: 1;
-    padding: 20px;
-    border-right: 1px solid #ccc;
-    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-#results-column {
-    border-right: none;
+#add-connection {
+    background-color: var(--shelby-blue);
+    border-color: var(--shelby-blue);
 }
 
-button, select, input {
-    margin-bottom: 10px;
+#add-connection:hover {
+    background-color: var(--shelby-dark-blue);
+    border-color: var(--shelby-dark-blue);
 }
 
-#connection-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#connection-list li {
+#connection-list .list-group-item {
     cursor: pointer;
-    padding: 5px;
-    margin-bottom: 5px;
-    background-color: #f0f0f0;
+    transition: background-color 0.2s;
 }
 
-#connection-list li:hover {
-    background-color: #e0e0e0;
+#connection-list .list-group-item:hover {
+    background-color: var(--shelby-light-blue);
+    color: white;
+}
+
+#action-select,
+#action-params input,
+#action-params select {
+    margin-bottom: 1rem;
+}
+
+#submit-action {
+    background-color: var(--shelby-blue);
+    border-color: var(--shelby-blue);
+    color: white;
+}
+
+#submit-action:hover {
+    background-color: var(--shelby-dark-blue);
+    border-color: var(--shelby-dark-blue);
 }
 
 #results-output {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Shelby-inspired racing stripes */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--shelby-blue),
+        var(--shelby-blue) 20px,
+        var(--shelby-silver) 20px,
+        var(--shelby-silver) 40px
+    );
+    z-index: -1;
 }

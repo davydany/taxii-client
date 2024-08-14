@@ -9,7 +9,7 @@ $(document).ready(function() {
         const $list = $('#connection-list');
         $list.empty();
         connections.forEach((conn, index) => {
-            $list.append(`<li data-index="${index}">${conn.name}</li>`);
+            $list.append(`<li class="list-group-item" data-index="${index}">${conn.name}</li>`);
         });
     }
 
@@ -19,18 +19,39 @@ $(document).ready(function() {
         const html = `
             <h3>${title}</h3>
             <form id="connection-form">
-                <input type="text" name="name" placeholder="Name" required value="${isEdit ? connection.name : ''}">
-                <input type="text" name="description" placeholder="Description" value="${isEdit ? connection.description : ''}">
-                <input type="text" name="username" placeholder="Username" required value="${isEdit ? connection.username : ''}">
-                <input type="password" name="password" placeholder="Password" required value="${isEdit ? connection.password : ''}">
-                <input type="url" name="url" placeholder="URL" required value="${isEdit ? connection.url : ''}">
-                <input type="number" name="port" placeholder="Port (default: 443)" value="${isEdit ? connection.port : '443'}">
-                <select name="taxiiVersion">
-                    <option value="2.1" ${isEdit && connection.taxiiVersion === '2.1' ? 'selected' : ''}>TAXII 2.1</option>
-                    <option value="1.0" ${isEdit && connection.taxiiVersion === '1.0' ? 'selected' : ''}>TAXII 1.0</option>
-                </select>
-                <button type="submit">${isEdit ? 'Update' : 'Add'}</button>
-                ${isEdit ? '<button type="button" id="delete-connection">Delete</button>' : ''}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required value="${isEdit ? connection.name : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" value="${isEdit ? connection.description : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required value="${isEdit ? connection.username : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required value="${isEdit ? connection.password : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL</label>
+                    <input type="url" class="form-control" id="url" name="url" required value="${isEdit ? connection.url : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="port" class="form-label">Port</label>
+                    <input type="number" class="form-control" id="port" name="port" value="${isEdit ? connection.port : '443'}">
+                </div>
+                <div class="mb-3">
+                    <label for="taxiiVersion" class="form-label">TAXII Version</label>
+                    <select class="form-select" id="taxiiVersion" name="taxiiVersion">
+                        <option value="2.1" ${isEdit && connection.taxiiVersion === '2.1' ? 'selected' : ''}>TAXII 2.1</option>
+                        <option value="1.0" ${isEdit && connection.taxiiVersion === '1.0' ? 'selected' : ''}>TAXII 1.0</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">${isEdit ? 'Update' : 'Add'}</button>
+                ${isEdit ? '<button type="button" class="btn btn-danger ms-2" id="delete-connection">Delete</button>' : ''}
             </form>
         `;
         $('#connections-column').append(html);
@@ -106,7 +127,10 @@ $(document).ready(function() {
         $params.empty();
 
         const commonParams = `
-            <input type="text" name="collection-id" placeholder="Collection ID">
+            <div class="mb-3">
+                <label for="collection-id" class="form-label">Collection ID</label>
+                <input type="text" class="form-control" id="collection-id" name="collection-id">
+            </div>
         `;
 
         let additionalParams = '';
@@ -114,22 +138,40 @@ $(document).ready(function() {
         switch (action) {
             case 'objects':
                 additionalParams = `
-                    <input type="datetime-local" name="added-after" placeholder="Added After">
-                    <input type="text" name="match[id]" placeholder="Match ID">
-                    <input type="text" name="match[type]" placeholder="Match Type">
-                    <input type="text" name="match[version]" placeholder="Match Version">
+                    <div class="mb-3">
+                        <label for="added-after" class="form-label">Added After</label>
+                        <input type="datetime-local" class="form-control" id="added-after" name="added-after">
+                    </div>
+                    <div class="mb-3">
+                        <label for="match-id" class="form-label">Match ID</label>
+                        <input type="text" class="form-control" id="match-id" name="match[id]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="match-type" class="form-label">Match Type</label>
+                        <input type="text" class="form-control" id="match-type" name="match[type]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="match-version" class="form-label">Match Version</label>
+                        <input type="text" class="form-control" id="match-version" name="match[version]">
+                    </div>
                 `;
                 break;
             case 'poll-request':
                 additionalParams = `
-                    <input type="datetime-local" name="begin-timestamp" placeholder="Begin Timestamp">
-                    <input type="datetime-local" name="end-timestamp" placeholder="End Timestamp">
+                    <div class="mb-3">
+                        <label for="begin-timestamp" class="form-label">Begin Timestamp</label>
+                        <input type="datetime-local" class="form-control" id="begin-timestamp" name="begin-timestamp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end-timestamp" class="form-label">End Timestamp</label>
+                        <input type="datetime-local" class="form-control" id="end-timestamp" name="end-timestamp">
+                    </div>
                 `;
                 break;
         }
 
         $params.append(commonParams + additionalParams);
-        $params.append('<button id="submit-action">Submit</button>');
+        $params.append('<button id="submit-action" class="btn btn-primary">Submit</button>');
     }
 
     $('#action-params').on('click', '#submit-action', function() {
